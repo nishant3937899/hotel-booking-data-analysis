@@ -137,21 +137,5 @@ The **Logistic Regression** model was trained using an end-to-end scikit-learn `
 
 ---
 
-### 📊 Classification Performance Metrics
-
-| Metric | Class 0 (Not Canceled) | Class 1 (Canceled) | Macro Avg | Weighted Avg |
-| :--- | :---: | :---: | :---: | :---: |
-| **Precision** | 0.9122 | 0.5308 | 0.7215 | 0.8072 |
-| **Recall** | 0.7261 | **0.8159** | 0.7710 | 0.7508 |
-| **F1-Score** | 0.8086 | 0.6432 | 0.7259 | 0.7631 |
-| **Accuracy** | — | — | — | **75.08%** |
-| **ROC-AUC Score** | — | — | — | **0.8506** |
-
----
-
-### 🧩 Confusion Matrix Breakdown
-
-```text
-                  Predicted: Not Canceled    Predicted: Canceled
-Actual: Not Canceled        9,181 (TN)              3,463 (FP)
-Actual: Canceled              884 (FN)              3,918 (TP)
+👤 Author
+- Nishant Chandra Verma
