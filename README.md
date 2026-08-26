@@ -5,7 +5,7 @@
 ![Pandas](https://img.shields.io/badge/Pandas-v2.0%2B-150458?logo=pandas)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-An end-to-end exploratory data analysis (EDA) and predictive modeling pipeline to forecast hotel booking cancellations. Built with **Pandas**, **Seaborn**, and **Scikit-Learn** using a leak-free `Pipeline` + `ColumnTransformer` architecture that addresses class imbalance.
+An end-to-end exploratory data analysis (EDA) and predictive modeling pipeline to predict hotel booking cancellations. Built with **Pandas**, **Seaborn**, and **Scikit-Learn** using a `Pipeline` architecture that addresses class imbalance.
 
 ---
 
@@ -14,7 +14,6 @@ An end-to-end exploratory data analysis (EDA) and predictive modeling pipeline t
 Cancellation rates disrupt hotel revenue forecasting, room allocation, and staffing. The goals of this project are:
 1. **Analyze booking patterns** across hotel properties, seasonality, lead times, pricing (ADR), and market channels.
 2. **Execute end-to-end data hygiene** by removing duplicates, handling missingness, filtering invalid zero-guest bookings, and addressing extreme pricing outliers.
-3. **Build and evaluate production-ready ML pipelines (Logistic Regression, Decision Tree, Random Forest, and XGBoost) to flag high-risk cancellations early for automated intervention.
 
 ---
 
@@ -23,7 +22,7 @@ Cancellation rates disrupt hotel revenue forecasting, room allocation, and staff
 * **Source:** Hotel Booking Demand Dataset (`hotel_bookings.csv`)
 * **Initial Records:** 119,390 rows × 32 columns
 * **Post-Deduplication & Cleaning:** 87,228 distinct valid reservations
-* **Target Variable:** `is_canceled` (0 = Check-Out, 1 = Canceled)
+* **Target Variable: is_canceled (0 = Not Canceled, 1 = Canceled)
 * **Cancellation Baseline Rate:** **27.52%** (post-cleaning)
 
 ---
@@ -133,12 +132,14 @@ pipeline = Pipeline(
 ```
 ## 🏆 Model Evaluation & Performance
 
-| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Logistic Regression (Baseline)** | 0.8012 | 0.7745 | 0.6521 | 0.7081 | 0.8534 |
-| **Decision Tree** | 0.8245 | 0.7810 | 0.7314 | 0.7554 | 0.8120 |
-| **Random Forest** | 0.8678 | 0.8492 | 0.7830 | 0.8148 | 0.9245 |
-| **XGBoost (Best Model)** | **0.8815** | **0.8650** | **0.8095** | **0.8363** | **0.9412** |
+
+| Model | Accuracy | Class 1 Precision *(Canceled)* | Class 1 Recall *(Canceled)* | Class 1 F1-Score | Macro Avg F1 | Weighted Avg F1 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **XGBClassifier** | **0.84** | **0.74** | 0.64 | **0.68** | **0.79** | **0.83** |
+| **RandomForestClassifier** | 0.75 | 0.53 | 0.88 | 0.66 | 0.73 | 0.76 |
+| **LogisticRegression** | 0.75 | 0.53 | 0.81 | 0.64 | 0.72 | 0.76 |
+| **DecisionTreeClassifier** | 0.72 | 0.50 | **0.89** | 0.64 | 0.71 | 0.74 |
+
 
 > **Key Takeaway:** The final **XGBoost** model achieved the highest F1-Score (**0.84**) and ROC-AUC score (**0.94**), significantly improving recall for predicting booking cancellations.
 
