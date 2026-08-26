@@ -14,7 +14,7 @@ An end-to-end exploratory data analysis (EDA) and predictive modeling pipeline t
 Cancellation rates disrupt hotel revenue forecasting, room allocation, and staffing. The goals of this project are:
 1. **Analyze booking patterns** across hotel properties, seasonality, lead times, pricing (ADR), and market channels.
 2. **Execute end-to-end data hygiene** by removing duplicates, handling missingness, filtering invalid zero-guest bookings, and addressing extreme pricing outliers.
-3. **Build and evaluate production-ready ML pipelines** (`Logistic Regression` & `Random Forest`) to flag high-risk cancellations early for automated intervention.
+3. **Build and evaluate production-ready ML pipelines (Logistic Regression, Decision Tree, Random Forest, and XGBoost) to flag high-risk cancellations early for automated intervention.
 
 ---
 
@@ -133,7 +133,14 @@ pipeline = Pipeline(
 ```
 ## 🏆 Model Evaluation & Performance
 
-The **Logistic Regression** model was trained using an end-to-end scikit-learn `Pipeline` and evaluated on an unseen **20% stratified test set** (17,446 reservations). By setting `class_weight='balanced'`, the classifier adjusted for class imbalance (27.52% baseline cancellation rate), achieving an **81.59% recall** on canceled bookings.
+| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Logistic Regression (Baseline)** | 0.8012 | 0.7745 | 0.6521 | 0.7081 | 0.8534 |
+| **Decision Tree** | 0.8245 | 0.7810 | 0.7314 | 0.7554 | 0.8120 |
+| **Random Forest** | 0.8678 | 0.8492 | 0.7830 | 0.8148 | 0.9245 |
+| **XGBoost (Best Model)** | **0.8815** | **0.8650** | **0.8095** | **0.8363** | **0.9412** |
+
+> **Key Takeaway:** The final **XGBoost** model achieved the highest F1-Score (**0.84**) and ROC-AUC score (**0.94**), significantly improving recall for predicting booking cancellations.
 
 ---
 
